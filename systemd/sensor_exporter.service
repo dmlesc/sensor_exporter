@@ -1,0 +1,12 @@
+[Unit]
+Description=sensor_exporter
+After=network.target
+
+[Service]
+User=pi
+ExecStart=/usr/bin/node sensor_exporter.js
+WorkingDirectory=/home/pi/git/sensor_exporter/src
+Restart=on-failure
+
+[Install]
+WantedBy=multi-user.target
