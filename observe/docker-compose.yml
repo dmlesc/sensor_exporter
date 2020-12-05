@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+
+  prometheus:
+    image: prom/prometheus:v2.22.2
+    container_name: prometheus
+    volumes:
+      - ./data_prometheus:/prometheus/data
+      - ./prometheus.yml:/prometheus/prometheus.yml
+    ports:
+      - '9090:9090'
+    command:
+      - '--storage.tsdb.retention.time=30d'
+      - '--web.enable-lifecycle'
+    extra_hosts:
+      - 'pi1:192.168.50.29'
+    restart: always
+
+  grafana:
+    image: grafana/grafana:7.3.3-ubuntu
+    container_name: grafana
+    depends_on:
+      - prometheus
+    volumes:
+      - ./data_grafana:/var/lib/grafana
+    ports:
+      - '3000:3000'
+    restart: always
