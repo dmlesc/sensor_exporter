@@ -7,7 +7,7 @@ const { spawn } = require('child_process')
 const port = 9113
 const ip = '0.0.0.0'
 const prefix = 'sensor_'
-const sensors = ['aht20.py', 'ms8607.py']
+const sensors = ['aht20.py', 'ms8607.py', 'bme680.py']
 
 const server = http.createServer((req, res) => {
   if (req.url == '/metrics') {
